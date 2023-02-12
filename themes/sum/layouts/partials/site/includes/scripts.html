@@ -1,0 +1,14 @@
+
+{{- $main := resources.Match "js/main/*.js" | resources.Concat "js/main.js" }}
+
+{{ $libraries := slice }}
+<!-- if we would vendor in other scripts -->
+<!-- {{- range .Site.Params.library }}
+  {{- if and (eq .type "script") .global }}
+    {{ $libraries = $libraries | append (resources.Get (print "js/" .name ".js")) }}
+  {{- end }}
+{{- end }} -->
+<!-- Let Hugo do its magic -->
+{{- $main = $libraries | append $main | resources.Concat "js/bundle.js" }}
+{{- $scripts := $main | minify | fingerprint -}}
+<script type="text/javascript" src="{{ $scripts.RelPermalink }}" crossorigin="anonymous" integrity="{{ $scripts.Data.Integrity }}"></script>

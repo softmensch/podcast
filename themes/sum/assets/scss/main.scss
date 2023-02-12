@@ -1,0 +1,33 @@
+@charset 'utf-8';
+
+
+/* SCSS Variables loaded from calligraphy/data/styles.toml */
+
+{{- range $key, $value := .Site.Data.styles }}
+${{ $key }}: {{ $value }};
+{{- end }}
+
+{{- range $taxonomyname, $taxonomy := .Site.Taxonomies }}
+{{- range $taxonomy }}
+{{- if or .Page.Params.backgroundColor .Page.Params.textColor }}
+.card, .card-banner {
+  &[data-taxonomy="{{ print .Page.Section "-" .Page.Title | urlize }}"] {
+    background-color: {{ .Page.Params.backgroundColor | default "var(--color-primary)" }};
+    color: {{ .Page.Params.textColor | default "var(--color-primary-contrast)" }};
+  }
+}
+{{- end }}
+{{- end }}
+{{- end }}
+
+
+@import "mixins";
+@import "typography";
+@import "utility";
+@import "components/__components-dir";
+@import "layouts";
+@import "shame";
+@import "font/scss/fontawesome.scss";
+@import "font/scss/solid.scss";
+@import "font/scss/regular.scss";
+@import "font/scss/brands.scss";

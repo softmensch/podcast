@@ -1,0 +1,141 @@
+baseURL = 'https://test.podcast.menschen.software/'
+languageCode = 'en-us'
+title = 'Test.Menschen.Software'
+ignoreErrors = ["error-output-taxonomy"]
+# theme order matters
+# see https://gohugo.io/hugo-modules/theme-components/
+theme = [ 'sum', 'podcast']
+
+enableInlineShortcodes = true
+copyright = "Content under CC-BY-SA-4.0"
+
+[params]
+author = ["Foo", "Bar"]
+
+[menu]
+    [[menu.main]]
+        name = "Warum"
+        url = "/"
+        weight = 1
+    [[menu.main]]
+        name = "Podcast"
+        url = "/"
+        weight = 1
+    [[menu.main]]
+        name = "About"
+        weight = 4
+        url = "/about/"
+    [[menu.main]]
+        identifier = "contact"
+        name = "Contact"
+        url = "/contact.html"
+        weight = 30
+    [[menu.main]]
+        identifier = "Hosts"
+        name = "Hosts"
+        url = "/authors/"
+        weight = 30
+    [[menu.main]]
+        identifier = "Guests"
+        name = "Guests"
+        url = "/guests/"
+        weight = 30
+
+[params.meta]
+  baseOGImage = "img/screenshot.jpg"
+  faviconComplete = true
+  faviconSVG = true
+  faviconVersion = ""
+  faviconMSColor = "#00aba9"
+  faviconiOSColor = "#00aba9"
+
+[params.hosting]
+media_directory = "https://cdn.sum-dev.nxdomain/"
+
+[params.feed]
+  copyright = "Copyright foo"
+  language = "en-us"
+  itunes_summary = "Summary of our podcast"
+  itunes_author =  "Hans Wurst"
+  itunes_owner_name = "Hans Wurst"
+  itunes_owner_email = "foo@example.com"
+  itunes_image = "https://example.com/sample.png"
+  itunes_top_category = "Technology"
+  itunes_first_sub_category = "Software"
+
+[params.socialParams]
+  twitter_handle = "@arresteddevops"
+  twitter_domain = "arresteddevops.com" # This domain shows in twitter cards as "View on `twitter_domain`"
+
+
+# links for the social icons
+  [[params.socialLinks]]
+    name = "mail"
+    icon = "fa-envelope"
+    type = "fas"
+    url = "about/contact"
+
+  [[params.socialLinks]]
+    name = "github"
+    icon = "fa-github"
+    type = "fab"
+    url = "https://github.com/trimoq"
+
+  [[params.socialLinks]]
+    name = "twitter"
+    icon = "fa-twitter"
+    type = "fab"
+    url = "https://twitter.com/amann_dev"
+
+  [[params.socialLinks]]
+    name = "nastodon"
+    icon = "fa-mastodon"
+    type = "fab"
+    url = "https://mastodon.social/@trimoq"
+    rel = "me"
+
+    
+
+[module.hugoVersion]
+  extended = true
+  min = "0.89.0"
+
+[permalinks]
+  episode = "/episodes/:slug"
+
+
+[outputFormats]
+
+  [outputFormats.episodeData]
+    baseName = "episode"
+    isPlainText = true
+    mediaType = "application/json"
+
+  [outputFormats.opusfeed]
+    MediaType             = "application/rss+xml"
+    BaseName              = "opusfeed"
+    IsHTML                = false
+    IsPlainText           = true
+    noUgly                = true
+    Rel                   = "alternate"
+
+  [outputFormats.mp3feed]
+    MediaType             = "application/rss+xml"
+    BaseName              = "mp3feed"
+    IsHTML                = false
+    IsPlainText           = true
+    noUgly                = true
+    Rel                   = "alternate"
+
+[outputs]
+  home = ['HTML', 'RSS']
+  page = ['HTML']
+  term = ['HTML', "opusfeed", "mp3feed"]
+  taxonomy = ['HTML']
+
+[taxonomies]
+  author = "authors"
+  series = "series"
+  category = "categories"
+  guest = "guests"
+  tag = "tags"

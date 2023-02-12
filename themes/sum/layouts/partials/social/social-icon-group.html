@@ -1,0 +1,5 @@
+{{- with .Site.Params.socialLinks }}
+<div id="home-social" class="pt-4 pb-4">
+  {{ partialCached "social/social_icons.html" . }}
+</div>
+{{- end }}

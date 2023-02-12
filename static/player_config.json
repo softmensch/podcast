@@ -1,0 +1,14 @@
+{
+  "theme": {
+    "tokens": {
+      "brand": "#1e1e1e",
+      "brandDark": "#1e1e1e",
+      "brandDarkest": "#2A2A2AFF",
+      "brandLightest": "#FFFFFFFF",
+      "shadeDark": "#00904CFF",
+      "shadeBase": "#FDFDFDFF",
+      "contrast": "#000000FF",
+      "alt": "#FEFEFEFF"
+    }
+  }
+}
