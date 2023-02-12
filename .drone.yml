@@ -7,32 +7,11 @@ steps:
 - name: build hugo website
   image: peaceiris/hugo
   commands:
-  - hugo
-  - tar -cvf ${DRONE_BRANCH}.podcast.menschen.software.tar public/
-  when:
-    branch:
-    - main
-    - dev
+  - mkdir public
+  - mv index.html public/
+  - tar -cvf prod.podcast.menschen.software.tar public/
+  
 
-- name: upload to blob
-  image: plugins/s3
-  settings:
-    endpoint: https://blob.pfudi.de/
-    bucket: drone
-    access_key: 
-      from_secret: blob_access_key
-    secret_key: 
-      from_secret: blob_secret_key
-    source: ${DRONE_BRANCH}.podcast.menschen.software.tar
-    target: /
-    path_style: true
-  when:
-    branch:
-    - main
-    - dev
-
-
-# Copy the files to a docker volume mounted locally
 - name: deploy to mounted volume - prod
   image: eeacms/rsync
   volumes:
@@ -50,11 +29,39 @@ steps:
   - name: test_directory
     path: /srv/public
   commands:
-    - pwd
-    - ls -lah .
-    - ls -lah /srv/
-    - ls -lah /srv/public/
     - rsync -azv --delete public/ /srv/public/
+  when:
+    branch:
+    - dev
+
+- name: upload to blob - prod
+  image: plugins/s3
+  settings:
+    endpoint: https://blob.pfudi.de/
+    bucket: drone
+    access_key: 
+      from_secret: blob_access_key
+    secret_key: 
+      from_secret: blob_secret_key
+    source: prod.podcast.menschen.software.tar
+    target: /
+    path_style: true
+  when:
+    branch:
+    - main
+
+- name: upload to blob - test
+  image: plugins/s3
+  settings:
+    endpoint: https://blob.pfudi.de/
+    bucket: drone
+    access_key: 
+      from_secret: blob_access_key
+    secret_key: 
+      from_secret: blob_secret_key
+    source: test.podcast.menschen.software.tar
+    target: /
+    path_style: true
   when:
     branch:
     - dev
@@ -62,7 +69,9 @@ steps:
 volumes:
 - name: test_directory
   host:
-    path: /usr/share/nginx/html/test.podcast.menschen.software/
+    path: /usr/share/nginx/html/test.podcast.menschen.software
+
+volumes:
 - name: prod_directory
   host:
-    path: /usr/share/nginx/html/podcast.menschen.software/
+    path: /usr/share/nginx/html/podcast.menschen.software

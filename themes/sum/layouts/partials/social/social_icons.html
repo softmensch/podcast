@@ -1,8 +1,0 @@
-{{ range . -}}
-<a href="{{ .url | safeURL }}" target="_blank" rel="noopener me" title="{{ .name | humanize }}" >
-    <span class="icon is-large ">
-        <i class="{{ .type }} fa-2x  {{ .icon}}"></i>
-    </span>
-</a>
-
-{{- end -}}
