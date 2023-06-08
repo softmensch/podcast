@@ -23,16 +23,6 @@ steps:
     branch:
     - main
     - dev
-    
-- name: build hugo website
-  image: peaceiris/hugo
-  commands:
-  - hugo
-  - tar -cvf ${DRONE_BRANCH}.podcast.menschen.software.tar public/
-  when:
-    branch:
-    - main
-    - dev
 
 - name: upload to blob
   image: plugins/s3
