@@ -4,18 +4,11 @@ name: build
 type: docker
 
 steps:
-- name: assets
-  image: node:lts
-  commands:
-    - npm install > /dev/null
-  when:
-    branch:
-    - main
-    - dev
 
 - name: build hugo website
   image: razonyang/hugo
   commands:
+  - npm install
   - npm install postcss-cli # das wird wohl kaum funktionieren
   - hugo
   - tar -cvf ${DRONE_BRANCH}.podcast.menschen.software.tar public/
