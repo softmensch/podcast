@@ -16,6 +16,7 @@ steps:
 - name: build hugo website
   image: peaceiris/hugo
   commands:
+  - npm install postcss-cli # das wird wohl kaum funktionieren
   - hugo
   - tar -cvf ${DRONE_BRANCH}.podcast.menschen.software.tar public/
   when:
