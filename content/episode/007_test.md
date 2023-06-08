@@ -8,7 +8,7 @@ authors: ["Gandalf"]
 
 audiofile: "unspecified"
 
-categories: ["menschen"]
+categories: ["menschen","software"]
 
 aliases:
     - /e/007

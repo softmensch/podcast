@@ -1,0 +1,13 @@
+{{- define "main" }}
+list of authors (terms) : {{ .Title }} : 
+<ul>
+    {{- range .Pages }}
+    <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+</ul>
+
+btw, these are links
+
+{{- end }}

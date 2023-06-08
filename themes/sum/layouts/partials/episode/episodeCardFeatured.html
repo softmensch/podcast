@@ -1,0 +1,27 @@
+
+
+<div class="
+col-span-2
+flex flex-row
+bg-sum_green-100">
+    <div class="flex-auto basis-1/12">
+        {{ partialCached "episode/episodeCategoryLabel" . .Page }}
+    </div>
+    <div class="flex-auto basis-11/12 text-sum_offwhite">
+        <div class="text-3xl  p-4">
+            {{ .Title }}
+        </div>
+        <div class="flex flex-row justify-evenly">
+            <div>
+                {{ partialCached "episode/episodePlayer" . .Page }}
+                {{ partialCached "episode/episodePeople" . .Page }}
+            </div>
+            <div>
+                {{ partialCached "episode/episodeChapters" . .Page }}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

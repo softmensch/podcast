@@ -1,6 +1,14 @@
 {{ define "main" }}
-<article class="justify-self-center mx-auto text-center prose dark:prose-invert prose-slate lg:prose-lg">
-    <h1 class="font-serif font-extralight text-5xl welcome-headline">{{ .Title }}</h1>
-    {{ .Content }}
-</article>
+<div class="container mx-auto">
+    {{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+    <div class="grid grid-cols-2 gap-4">
+        {{ range first 1 $pages }}
+            {{ partialCached "episode/episodeCardFeatured" . .Page }}
+        {{ end }}
+        {{ range after 1 $pages }}
+                {{ partialCached "episode/episodeCard" . .Page }}
+        {{ end }}
+    </div>
+</div>
+
 {{ end }}

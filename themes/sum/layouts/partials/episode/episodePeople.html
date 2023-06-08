@@ -1,0 +1,31 @@
+<div class="
+    grid grid-flow-col grid-cols-auto
+    py-2
+    ">
+
+{{- if .Params.authors }}
+<ol>
+  {{- range $index, $author := .Params.authors }}
+    <li>
+      {{- $authorPage := site.GetPage "authors" (urlize $author) }}
+      {{- $image := (partial "utils/author-image" (dict "author" $author "size" "200x200 center")) }}
+      <a href="{{ $authorPage.Permalink }}">      
+        <img
+            class="
+            h-auto
+            max-w-[60px]
+            rounded-full object-contain"
+            src="{{ $image.thumbnail }}" 
+            alt="{{ $authorPage.Title }}'s Headshot">
+
+      </a>
+
+      <!-- <div class="author-meta">
+        <a href="{{ $authorPage.Permalink }}" class="author-name">{{ $authorPage.Title }}</a>
+        <p class="author-assignment">{{ $authorPage.Params.assignment | default "Guest Author" }}</p>
+      </div> -->
+    </li>
+  {{ end }}
+</ol>
+{{- end }}
+</div>

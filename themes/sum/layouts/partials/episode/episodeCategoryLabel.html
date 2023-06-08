@@ -1,0 +1,20 @@
+
+<div class="flex flex-col ">
+    {{ range .Params.categories  }}        
+        {{ if eq . "menschen"}}
+            <div class="p-2 m-2 bg-sum_green-100">
+                <a  
+                class=" text-sum_offwhite"
+                href="/categories/{{ . | urlize }}"  
+                data-taxonomy="{{ print "category-" . | urlize }}">{{ . }}</a>
+            </div>
+        {{ else }}
+            <div class="p-2 m-2 bg-sum_traubensaft">
+                <a  
+                class=" text-sum_offwhite"
+                href="/categories/{{ . | urlize }}"  
+                data-taxonomy="{{ print "category-" . | urlize }}">{{ . }}</a>
+            </div>
+        {{ end }}
+    {{ end }}
+</div>

@@ -1,0 +1,20 @@
+{{- define "main" }}
+<section class="l-container_content">
+  <div class="card" data-taxonomy="{{ print .Page.Section "-" .Page.Title | urlize }}">
+    <h1 class="card-title">{{ .Data.Singular | humanize }}: {{ .Title }}</h1>
+    {{ .Content }}
+  </div>
+  {{- range .Paginator.Pages }}
+  <article class="card">
+    {{ .Title }}
+    <section class="card-content">
+      {{ .Summary | truncate 350 "..." }}
+    </section>
+  </article>
+  {{- end }}
+</section>
+{{- end }}
+
+{{- define "pagination" }}
+  {{ partial "pagination" . }}
+{{- end }}

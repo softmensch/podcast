@@ -1,0 +1,14 @@
+{{- define "main" }}
+  list of guests: (terms) {{ .Title }} : 
+  <ul>
+    {{- range .Pages }}
+    <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+  </ul>
+
+  btw, these are links
+
+  
+{{- end }}

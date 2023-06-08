@@ -7,12 +7,20 @@ module.exports = {
     "./content/**/*.html"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        sum_green: {
+          100: '#85AC34'
+        },
+        sum_orange: '#B84E38',
+        sum_offwhite: '#FDFAFA',
+        sum_traubensaft: '#540131'
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/forms'),
-    require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
   ]
 }

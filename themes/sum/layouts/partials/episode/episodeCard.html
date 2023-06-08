@@ -1,0 +1,22 @@
+
+
+<div class="
+flex flex-row
+bg-white">
+    <div class="flex-auto basis-1/12">
+        {{ partialCached "episode/episodeCategoryLabel" . .Page }}
+    </div>
+    <div class="flex-auto basis-11/12 text-slate-600">
+        <div class="text-3xl  p-4">
+            {{ .Title }}
+        </div>
+        <div class="grid grid-2">
+            <div>
+                {{ partialCached "episode/episodeChapters" . .Page }}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
