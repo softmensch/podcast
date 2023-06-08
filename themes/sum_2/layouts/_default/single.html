@@ -1,0 +1,23 @@
+{{- define "main" }}
+<article class="l-container_content card">
+  {{ partialCached "entry/header" . .Page }}
+  <section class="card-content">
+    <div class="player" id="singleplayer"></div>
+    <script src="http://cdn.podlove.org/web-player/5.x/embed.js"></script>
+    <script>podlovePlayer("#singleplayer", "/sample_episode.json", "/player_config.json");</script>
+
+    {{ .Page.Content }}
+    
+  </section>
+
+  {{- if .Params.tags }}
+  	{{ $tags := sort .Params.tags }}
+  	{{ $variant := printf "%x" $tags }}
+  	{{ partialCached "entry/footer.html" . $variant }}
+  {{- end }}
+</article>
+{{- end }}
+
+{{- define "pagination" }}
+  {{ partial "pagination" . }}
+{{- end }}

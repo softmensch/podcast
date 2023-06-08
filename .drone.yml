@@ -4,6 +4,26 @@ name: build
 type: docker
 
 steps:
+- name: assets
+  image: node:lts
+  commands:
+    - npm install > /dev/null
+    - npm run build
+  when:
+    branch:
+    - main
+    - dev
+
+- name: build hugo website
+  image: peaceiris/hugo
+  commands:
+  - hugo
+  - tar -cvf ${DRONE_BRANCH}.podcast.menschen.software.tar public/
+  when:
+    branch:
+    - main
+    - dev
+    
 - name: build hugo website
   image: peaceiris/hugo
   commands:

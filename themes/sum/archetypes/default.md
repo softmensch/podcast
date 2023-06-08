@@ -1,10 +1,5 @@
-+++
-authors = [""]
-title = ""
-date = ""
-feature = ""
-featureCaption = ""
-tags = [""]
-categories = [""]
-series = ""
-+++
+---
+author: 
+title: {{ replace .Name "-" " " | title }}
+date: {{ .Date }}
+---
