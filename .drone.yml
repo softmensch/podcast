@@ -8,7 +8,6 @@ steps:
   image: node:lts
   commands:
     - npm install > /dev/null
-    - npm run build
   when:
     branch:
     - main
