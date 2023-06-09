@@ -4,13 +4,12 @@ name: build
 type: docker
 
 steps:
-- name: build hugo website
-  image: razonyang/hugo
+- name: copy placeholder
+  image: peaceiris/hugo
   commands:
-  - npm install
-  - npm install postcss-cli # to make sure the hugo pipe works
-  - hugo
-  - tar -cvf ${DRONE_BRANCH}.sum.fm.tar public/
+  - mkdir public
+  - mv index.html public/
+  - tar -cvf prod.podcast.menschen.software.tar public/
 
 - name: upload to blob
   image: plugins/s3
@@ -59,6 +58,6 @@ volumes:
     path: /usr/share/nginx/html/dev.sum.fm/
 ---
 kind: signature
-hmac: 190e7ed720e509488035abc1af57500c8af9a59c8d725caac6e1dbeec9c12ee7
+hmac: 44f65b9f230aaed1e0dadca56f7b3a88730d0354fc8d3b54dc5f7b83bd7f8fa2
 
 ...
