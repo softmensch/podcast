@@ -61,3 +61,8 @@ volumes:
 - name: prod_directory
   host:
     path: /usr/share/nginx/html/dev.sum.fm/
+---
+kind: signature
+hmac: 190e7ed720e509488035abc1af57500c8af9a59c8d725caac6e1dbeec9c12ee7
+
+...
