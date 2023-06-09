@@ -4,18 +4,13 @@ name: build
 type: docker
 
 steps:
-
 - name: build hugo website
   image: razonyang/hugo
   commands:
   - npm install
-  - npm install postcss-cli # das wird wohl kaum funktionieren
+  - npm install postcss-cli # to make sure the hugo pipe works
   - hugo
-  - tar -cvf ${DRONE_BRANCH}.podcast.menschen.software.tar public/
-  when:
-    branch:
-    - main
-    - dev
+  - tar -cvf ${DRONE_BRANCH}.sum.fm.tar public/
 
 - name: upload to blob
   image: plugins/s3
@@ -26,13 +21,9 @@ steps:
       from_secret: blob_access_key
     secret_key: 
       from_secret: blob_secret_key
-    source: ${DRONE_BRANCH}.podcast.menschen.software.tar
+    source: ${DRONE_BRANCH}.sum.fm.tar
     target: /
     path_style: true
-  when:
-    branch:
-    - main
-    - dev
 
 
 # Copy the files to a docker volume mounted locally
@@ -62,10 +53,11 @@ steps:
     branch:
     - dev
 
+# Copy the files to a docker volume mounted locally
 volumes:
 - name: test_directory
   host:
-    path: /usr/share/nginx/html/test.podcast.menschen.software/
+    path: /usr/share/nginx/html/dev.sum.fm/
 - name: prod_directory
   host:
-    path: /usr/share/nginx/html/podcast.menschen.software/
+    path: /usr/share/nginx/html/dev.sum.fm/
