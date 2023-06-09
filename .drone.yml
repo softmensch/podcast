@@ -9,7 +9,7 @@ steps:
   commands:
   - mkdir public
   - mv index.html public/
-  - tar -cvf prod.podcast.menschen.software.tar public/
+  - tar -cvf ${DRONE_BRANCH}.sum.fm.tar public/
 
 - name: upload to blob
   image: plugins/s3
@@ -58,6 +58,6 @@ volumes:
     path: /usr/share/nginx/html/dev.sum.fm/
 ---
 kind: signature
-hmac: 44f65b9f230aaed1e0dadca56f7b3a88730d0354fc8d3b54dc5f7b83bd7f8fa2
+hmac: 765bf63d1cae29d79ddbfd7f4aa5fd27290b9d90625f5eb59fa20a446a48d187
 
 ...
