@@ -5,13 +5,28 @@ type: docker
 
 steps:
 - name: build hugo website
-  image: peaceiris/hugo
+  image: razonyang/hugo
   commands:
-  - mkdir public
-  - mv index.html public/
-  - tar -cvf prod.podcast.menschen.software.tar public/
-  
+  - npm install
+  - npm install postcss-cli # to make sure the hugo pipe works
+  - hugo
+  - tar -cvf ${DRONE_BRANCH}.sum.fm.tar public/
 
+- name: upload to blob
+  image: plugins/s3
+  settings:
+    endpoint: https://blob.pfudi.de/
+    bucket: drone
+    access_key: 
+      from_secret: blob_access_key
+    secret_key: 
+      from_secret: blob_secret_key
+    source: ${DRONE_BRANCH}.sum.fm.tar
+    target: /
+    path_style: true
+
+
+# Copy the files to a docker volume mounted locally
 - name: deploy to mounted volume - prod
   image: eeacms/rsync
   volumes:
@@ -34,44 +49,11 @@ steps:
     branch:
     - dev
 
-- name: upload to blob - prod
-  image: plugins/s3
-  settings:
-    endpoint: https://blob.pfudi.de/
-    bucket: drone
-    access_key: 
-      from_secret: blob_access_key
-    secret_key: 
-      from_secret: blob_secret_key
-    source: prod.podcast.menschen.software.tar
-    target: /
-    path_style: true
-  when:
-    branch:
-    - main
-
-- name: upload to blob - test
-  image: plugins/s3
-  settings:
-    endpoint: https://blob.pfudi.de/
-    bucket: drone
-    access_key: 
-      from_secret: blob_access_key
-    secret_key: 
-      from_secret: blob_secret_key
-    source: test.podcast.menschen.software.tar
-    target: /
-    path_style: true
-  when:
-    branch:
-    - dev
-
+# Copy the files to a docker volume mounted locally
 volumes:
 - name: test_directory
   host:
-    path: /usr/share/nginx/html/test.podcast.menschen.software
-
-volumes:
+    path: /usr/share/nginx/html/dev.sum.fm/
 - name: prod_directory
   host:
-    path: /usr/share/nginx/html/podcast.menschen.software
+    path: /usr/share/nginx/html/dev.sum.fm/
