@@ -63,6 +63,6 @@ volumes:
     path: /usr/share/nginx/html/dev.sum.fm/
 ---
 kind: signature
-hmac: 190e7ed720e509488035abc1af57500c8af9a59c8d725caac6e1dbeec9c12ee7
+hmac: 1510969a7dc22b9c14df3d208189bb3035358455f7cd0e34ac05c7eee0f10533
 
 ...
