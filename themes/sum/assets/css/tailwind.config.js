@@ -16,6 +16,9 @@ module.exports = {
         sum_offwhite: '#FDFAFA',
         sum_traubensaft: '#540131'
       },
+      rotate: {
+        270: '270deg'
+      }
     },
   },
   plugins: [
